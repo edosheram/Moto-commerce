@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motorcycle Parts E-commerce</title>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: white;
+      }
+      .slick-prev,
+      .slick-next {
+        display: none !important; /* Hide the buttons */
+      }
+      .category-link {
+        color: #007bff;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .category-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Modern Card Styles */
+      .modern-card {
+        background-color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        border: 1px solid #e0e0e0;
+      }
+
+      .modern-card:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .modern-card img {
+        border-radius: 0.5rem;
+      }
+      /* Footer */
+      .footer {
+        background-color: #222;
+        color: #fff;
+        padding: 0.75rem;
+        text-align: center;
+        font-size: 0.7rem;
+      }
+
+      .social-icons a {
+        color: #fff;
+        font-size: 1rem;
+        margin: 0 0.4rem;
+        text-decoration: none;
+      }
+
+      /* Header */
+      .top-header {
+        background-color: #f8f8f8;
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: "Racing Sans One", sans-serif;
+      }
+
+      .search-bar {
+        flex-grow: 1;
+        margin: 0 0.75rem;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+        padding: 0.35rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 0.9rem;
+      }
+
+      .header-icons {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .header-icons a {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative; /* For the badge */
+      }
+
+      .material-symbols-outlined {
+        font-size: 1.25rem;
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -0.5rem;
+        right: -0.5rem;
+        background-color: #ff6f00;
+        color: white;
+        border-radius: 50%;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.6rem;
+      }
+
+      .modern-card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .modern-card p {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 1rem;
+      }
+
+      .modern-card button {
+        background-color: #007bff;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        border: none;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+
+      .modern-card button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Padded Title Styles */
+      .padded-title {
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.75rem;
+        margin-left: 1rem; /* Added margin-left */
+      }
+      .protective-gear-carousel {
+        margin-left: -1rem;
+        margin-right: -1rem;
+      }
+      .protective-gear-carousel .slick-slide {
+        padding: 1rem;
+      }
+      .see-more-link {
+        color: #007bff;
+        text-decoration: none;
+        cursor: pointer;
+        margin-top: 1rem;
+        display: inline-block;
+        text-align: right;
+      }
+
+      .see-more-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="top-header">
+      <div class="logo">MotoPro</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." />
+      </div>
+      <div class="header-icons">
+        <a href="#" id="cart-icon"
+          ><span class="material-symbols-outlined">shopping_cart</span
+          ><span id="cart-count" class="cart-badge" style="display: none"
+            >0</span
+          ></a
+        >
+        <a href="#"><span class="material-symbols-outlined">person</span></a>
+      </div>
+    </header>
+
+    <main class="container mx-auto py-6">
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 padded-title">
+          Categories
+        </h2>
+        <div class="categories-carousel">
+          <div class="p-4">
+            <a href="categories.html" class="category-link">
+              <div class="modern-card flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Helmets"
+                  class="w-32 h-32 rounded-full object-cover mb-2"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Helmets</h3>
+              </div>
+            </a>
+          </div>
+          <div class="p-4">
+            <a href="categories.html" class="category-link">
+              <div class="modern-card flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Riding Gear"
+                  class="w-32 h-32 rounded-full object-cover mb-2"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Riding Gear</h3>
+              </div>
+            </a>
+          </div>
+          <div class="p-4">
+            <a href="categories.html" class="category-link">
+              <div class="modern-card flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Parts"
+                  class="w-32 h-32 rounded-full object-cover mb-2"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Parts</h3>
+              </div>
+            </a>
+          </div>
+          <div class="p-4">
+            <a href="categories.html" class="category-link">
+              <div class="modern-card flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Accessories"
+                  class="w-32 h-32 rounded-full object-cover mb-2"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Accessories</h3>
+              </div>
+            </a>
+          </div>
+          <div class="p-4">
+            <a href="categories.html" class="category-link">
+              <div class="modern-card flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Maintenance"
+                  class="w-32 h-32 rounded-full object-cover mb-2"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Maintenance</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 padded-title">
+          Best Selling Products
+        </h2>
+        <div class="product-carousel">
+          <div class="p-4">
+            <div class="modern-card">
+              <img
+                src="https://via.placeholder.com/200"
+                alt="Product 1"
+                class="w-full h-48 object-cover mb-2"
+              />
+              <h3 class="text-md font-semibold text-gray-700">Product 1</h3>
+              <p class="text-gray-600">$199.99</p>
+              <button>Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="modern-card">
+              <img
+                src="https://via.placeholder.com/200"
+                alt="Product 2"
+                class="w-full h-48 object-cover mb-2"
+              />
+              <h3 class="text-md font-semibold text-gray-700">Product 2</h3>
+              <p class="text-gray-600">$249.99</p>
+              <button>Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="modern-card">
+              <img
+                src="https://via.placeholder.com/200"
+                alt="Product 3"
+                class="w-full h-48 object-cover mb-2"
+              />
+              <h3 class="text-md font-semibold text-gray-700">Product 3</h3>
+              <p class="text-gray-600">$149.99</p>
+              <button>Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="modern-card">
+              <img
+                src="https://via.placeholder.com/200"
+                alt="Product 4"
+                class="w-full h-48 object-cover mb-2"
+              />
+              <h3 class="text-md font-semibold text-gray-700">Product 4</h3>
+              <p class="text-gray-600">$299.99</p>
+              <button>Add to Cart</button>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="modern-card">
+              <img
+                src="https://via.placeholder.com/200"
+                alt="Product 5"
+                class="w-full h-48 object-cover mb-2"
+              />
+              <h3 class="text-md font-semibold text-gray-700">Product 5</h3>
+              <p class="text-gray-600">$179.99</p>
+              <button>Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 padded-title">
+          Best Brands
+        </h2>
+        <div class="brand-carousel">
+          <div class="p-4">
+            <div
+              class="bg-white rounded-lg shadow-md p-4 flex items-center justify-center"
+            >
+              <img
+                src="https://via.placeholder.com/150x50"
+                alt="Brand 1"
+                class="h-12 object-contain"
+              />
+            </div>
+          </div>
+          <div class="p-4">
+            <div
+              class="bg-white rounded-lg shadow-md p-4 flex items-center justify-center"
+            >
+              <img
+                src="https://via.placeholder.com/150x50"
+                alt="Brand 2"
+                class="h-12 object-contain"
+              />
+            </div>
+          </div>
+          <div class="p-4">
+            <div
+              class="bg-white rounded-lg shadow-md p-4 flex items-center justify-center"
+            >
+              <img
+                src="https://via.placeholder.com/150x50"
+                alt="Brand 3"
+                class="h-12 object-contain"
+              />
+            </div>
+          </div>
+          <div class="p-4">
+            <div
+              class="bg-white rounded-lg shadow-md p-4 flex items-center justify-center"
+            >
+              <img
+                src="https://via.placeholder.com/150x50"
+                alt="Brand 4"
+                class="h-12 object-contain"
+              />
+            </div>
+          </div>
+          <div class="p-4">
+            <div
+              class="bg-white rounded-lg shadow-md p-4 flex items-center justify-center"
+            >
+              <img
+                src="https://via.placeholder.com/150x50"
+                alt="Brand 5"
+                class="h-12 object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 padded-title">
+          Protective Gear in 2025
+        </h2>
+        <div class="protective-gear-carousel">
+          <div class="p-4">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Helmet 2025"
+                  class="w-32 h-32 object-cover mb-2 rounded-md"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Helmet</h3>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Body Gear 2025"
+                  class="w-32 h-32 object-cover mb-2 rounded-md"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Body Gear</h3>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="flex flex-col items-center">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Protective Padding 2025"
+                  class="w-32 h-32 object-cover mb-2 rounded-md"
+                />
+                <h3 class="text-md font-semibold text-gray-700">Padding</h3>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <div
+              class="bg-white rounded-lg shadow-md p-6 flex items-center justify-center"
+            >
+              <a href="categories.html" class="see-more-link">See More</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      <p>&copy; 2025 MotoPro. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $(".categories-carousel").slick({
+          infinite: true,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          //autoplay: true,  remove autoplay
+          //autoplaySpeed: 3000, remove autoplay
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
+
+        $(".product-carousel").slick({
+          infinite: true,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          //autoplay: true,  remove autoplay
+          //autoplaySpeed: 3000, remove autoplay
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
+
+        $(".brand-carousel").slick({
+          infinite: true,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          //autoplay: true,  remove autoplay
+          //autoplaySpeed: 3000, remove autoplay
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
+
+        $(".protective-gear-carousel").slick({
+          infinite: true,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          //autoplay: true,
+          //autoplaySpeed: 3000,
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
+      });
+    </script>
+  </body>
+</html>
