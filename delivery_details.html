@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery Details - MotoPro</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ff6f00", // Your brand color
+              secondary: "#777",
+              accent: "#008cba",
+              light: "#f8f8f8",
+              border: "#eee",
+              text: "#333",
+              graytext: "#777",
+            },
+            fontFamily: {
+              "racing-sans": ['"Racing Sans One"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Basic Reset (Consider moving relevant parts to your style.css) */
+      body,
+      h1,
+      h2,
+      h3,
+      p,
+      ul,
+      li,
+      div,
+      header,
+      nav,
+      a,
+      span,
+      button,
+      img {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      .container {
+        max-width: 768px;
+        margin: 20px auto;
+        padding: 1rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .section {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        background-color: #f8f8f8;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 0.5rem;
+      }
+
+      .delivery-info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .delivery-info-icon {
+        margin-right: 0.75rem;
+        color: #777;
+      }
+
+      .delivery-info-label {
+        font-weight: bold;
+        color: #333;
+        margin-right: 0.5rem;
+      }
+
+      .delivery-info-value {
+        color: #555;
+      }
+
+      .guarantee-box {
+        background-color: #f0f8ff;
+        border: 1px solid #add8e6;
+        color: #00008b;
+        padding: 0.75rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .guarantee-icon {
+        margin-right: 0.5rem;
+      }
+
+      .shipping-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .shipping-icon {
+        margin-right: 0.75rem;
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      .shipping-carrier {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .address-box {
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        background-color: #fff;
+      }
+
+      .address-title {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .address-line {
+        color: #555;
+        margin-bottom: 0.25rem;
+      }
+
+      .order-summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .order-summary-item:last-child {
+        border-bottom: none;
+      }
+
+      .item-details {
+        flex-grow: 1;
+        margin-right: 1rem;
+      }
+
+      .item-name {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .item-quantity {
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      .item-price {
+        font-weight: bold;
+        color: #333;
+      }
+
+      /* Styles for Header, Navigation, and Back Button (You might have these in style.css) */
+      .top-header {
+        background-color: #f8f8f8;
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: "Racing Sans One", sans-serif;
+      }
+      .logo img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .search-bar {
+        flex-grow: 1;
+        margin: 0 0.75rem;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+        padding: 0.35rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 0.9rem;
+      }
+
+      .header-icons {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .header-icons a {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative; /* For the badge */
+      }
+
+      .material-symbols-outlined {
+        font-size: 1.25rem;
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -0.5rem;
+        right: -0.5rem;
+        background-color: #ff6f00;
+        color: white;
+        border-radius: 50%;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.6rem;
+      }
+
+      .navigation {
+        background-color: #fff;
+        padding: 0.5rem 0;
+        overflow-x: auto;
+        border-top: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .nav-links ul {
+        list-style: none;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+        white-space: nowrap;
+        font-size: 1rem;
+        font-family: "Racing Sans One", sans-serif;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #333;
+        padding: 0.5rem 0;
+      }
+
+      .nav-links li a.active {
+        font-weight: bold;
+        color: #ff6f00;
+      }
+
+      .back-button-header {
+        background-color: #f8f8f8;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+      }
+
+      .back-button-header a {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 1rem;
+      }
+
+      .back-button-header a .material-symbols-outlined {
+        font-size: 1.5rem;
+      }
+
+      .back-button-header h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: "Racing Sans One", sans-serif;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="back-button-header">
+      <a href="javascript:history.back()">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <h1>Delivery Details</h1>
+    </header>
+
+    <nav class="navigation">
+      <div class="nav-links">
+        <ul>
+          <li>
+            <a href="categories.html" data-category="helmets" class="nav-link">Helmet</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="riding-gear" class="nav-link">Riding Gear</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="parts" class="nav-link">Parts</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="accessories" class="nav-link">Accessories</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="tires" class="nav-link">Tires</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="guarantee-box">
+        <span class="material-symbols-outlined guarantee-icon">history</span>
+        Guaranteed On-Time Delivery: Get a ₱50.00 voucher if no delivery was attempted by the
+        designated time and date.
+      </div>
+
+      <section class="section">
+        <h2 class="section-title">Estimated Delivery Date</h2>
+        <div class="delivery-info-item">
+          <span class="material-symbols-outlined delivery-info-icon">calendar_month</span>
+          <span class="delivery-info-label">Arriving Between:</span>
+          <span class="delivery-info-value">03 May - 15 May</span>
+        </div>
+        <p class="text-sm text-graytext">Seller will arrange your order by 04 May</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Shipping Information</h2>
+        <div class="shipping-info">
+          <span class="material-symbols-outlined shipping-icon">local_shipping</span>
+          <span class="shipping-carrier">Flash Express</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Delivery Address</h2>
+        <div class="address-box">
+          <p class="address-title">Jay PapaGods</p>
+          <p class="address-line">Valdez Building, Zone 4, Dalirig Valerie Blaire Barbershop</p>
+          <p class="address-line">Dalirig, Manolo Fortich, Bukidnon, Mindanao, 8703</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Order Summary</h2>
+        <ul id="order-summary"></ul>
+        <div class="order-summary-item">
+          <span class="item-details">
+            <span class="item-name">Subtotal</span>
+          </span>
+          <span class="item-price" id="subtotal">$0.00</span>
+        </div>
+        <div class="order-summary-item">
+          <span class="item-details">
+            <span class="item-name">Shipping Cost</span>
+          </span>
+          <span class="item-price" id="shipping-cost">Free</span>
+        </div>
+        <div class="order-summary-item">
+          <span class="item-details">
+            <span class="item-name">Total</span>
+          </span>
+          <span class="item-price font-bold" id="total">$0.00</span>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const orderSummaryList = document.getElementById("order-summary");
+        const subtotalSpan = document.getElementById("subtotal");
+        const totalSpan = document.getElementById("total");
+
+        // Retrieve cart data from localStorage
+        const cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+        let subtotal = 0;
+
+        // Function to format price
+        function formatPrice(price) {
+          return parseFloat(price.replace("$", "")).toFixed(2);
+        }
+
+        // Populate the order summary
+        cart.forEach((item) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("order-summary-item");
+          listItem.innerHTML = `
+                    <div class="item-details">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-quantity">(${item.quantity})</span>
+                    </div>
+                    <span class="item-price">$${(formatPrice(item.price) * item.quantity).toFixed(
+                      2
+                    )}</span>
+                `;
+          orderSummaryList.appendChild(listItem);
+          subtotal += parseFloat(formatPrice(item.price)) * item.quantity;
+        });
+
+        // Update the summary totals
+        subtotalSpan.textContent = `$${subtotal.toFixed(2)}`;
+        totalSpan.textContent = `$${subtotal.toFixed(2)}`; // Assuming free shipping
+      });
+    </script>
+  </body>
+</html>

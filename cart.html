@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Shopping Cart - MotoPro</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ff6f00", // Your brand color
+              secondary: "#777",
+              accent: "#008cba",
+              light: "#f8f8f8",
+              border: "#eee",
+              text: "#333",
+              graytext: "#777",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Basic Reset (Consider moving relevant parts to your style.css) */
+      body,
+      h1,
+      h2,
+      h3,
+      p,
+      ul,
+      li,
+      form,
+      input,
+      button {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      /* Header (Keep this as is) */
+      .top-header {
+        background-color: #f8f8f8;
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: "Racing Sans One", sans-serif;
+      }
+      .logo img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .search-bar {
+        flex-grow: 1;
+        margin: 0 0.75rem;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+        padding: 0.35rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 0.9rem;
+      }
+
+      .header-icons {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .header-icons a {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative; /* For the badge */
+      }
+
+      .material-symbols-outlined {
+        font-size: 1.25rem;
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -0.5rem;
+        right: -0.5rem;
+        background-color: #ff6f00;
+        color: white;
+        border-radius: 50%;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.6rem;
+      }
+
+      /* Navigation Bar (Keep this as is) */
+      .navigation {
+        background-color: #fff;
+        padding: 0.5rem 0;
+        overflow-x: auto;
+        border-top: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .nav-links ul {
+        list-style: none;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+        white-space: nowrap;
+        font-size: 1rem;
+        font-family: "Racing Sans One", sans-serif;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #333;
+        padding: 0.5rem 0;
+      }
+
+      .nav-links li a.active {
+        font-weight: bold;
+        color: #ff6f00;
+      }
+
+      /* Footer (Keep this as is) */
+      .footer {
+        background-color: #222;
+        color: #fff;
+        padding: 0.75rem;
+        text-align: center;
+        font-size: 0.7rem;
+      }
+
+      .social-icons a {
+        color: #fff;
+        font-size: 1rem;
+        margin: 0 0.4rem;
+        text-decoration: none;
+      }
+
+      /* Custom Grid Layout for Cart Items */
+      .cart-grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto auto auto; /* Adjust rows based on content */
+        grid-column-gap: 1rem;
+        grid-row-gap: 0.5rem;
+        align-items: center; /* Vertically align items in the grid */
+      }
+
+      .cart-image-area {
+        grid-area: 1 / 1 / 4 / 3;
+      }
+
+      .cart-name-area {
+        grid-area: 1 / 3 / 2 / 5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cart-quantity-area {
+        grid-area: 2 / 3 / 3 / 5;
+        display: flex;
+        align-items: center;
+      }
+
+      .cart-price-area {
+        grid-area: 3 / 3 / 4 / 4;
+      }
+
+      .cart-actions-area {
+        grid-area: 3 / 4 / 4 / 5;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Checkout Area Styling */
+      .checkout-parent {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, auto);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        margin-top: 1.5rem;
+        border-radius: 0.5rem;
+        overflow: hidden; /* To contain rounded corners of inner elements */
+      }
+
+      .checkout-div1 {
+        grid-area: 1 / 1 / 5 / 5;
+        border-top: 2px solid black;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: top;
+        border-radius: 0.5rem 0.5rem 0 0;
+        height: 100px;
+      }
+
+      .checkout-div2 {
+        grid-area: 3 / 1 / 5 / 5;
+        border-radius: 40px; /* 80% of height */
+        background-color: black;
+        color: white;
+        padding: 0.75rem;
+        text-align: center;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .checkout-div2:hover {
+        background-color: #222;
+      }
+
+      .checkout-div3 {
+        align-items: top;
+        margin-right: 0.5rem;
+      }
+
+      .checkout-div4 {
+        font-weight: bold;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top-header">
+      <div class="logo">
+        <a href="homepage.html">
+          <img src="images/logo.svg" alt="MotoPro Logo" />
+        </a>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." />
+      </div>
+      <div class="header-icons">
+        <a href="cart.html" id="cart-icon">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          <span id="cart-count" class="cart-badge" style="display: none">0</span>
+        </a>
+        <a href="profile.html"><span class="material-symbols-outlined">person</span></a>
+      </div>
+    </header>
+
+    <nav class="navigation">
+      <div class="nav-links">
+        <ul>
+          <li>
+            <a href="categories.html" data-category="helmets" class="nav-link">Helmet</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="riding-gear" class="nav-link">Riding Gear</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="parts" class="nav-link">Parts</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="accessories" class="nav-link">Accessories</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="tires" class="nav-link">Tires</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 max-w-3xl p-4 bg-white rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-6 border-b pb-2">Your Shopping Cart</h2>
+      <ul id="cart-items" class="space-y-6"></ul>
+
+      <div class="checkout-parent">
+        <div class="checkout-div1">
+          <div class="flex items-top">
+            <input
+              type="checkbox"
+              id="select-all"
+              class="checkout-div3 form-checkbox h-4 w-4 text-accent focus:ring-accent"
+            />
+            <label for="select-all" class="text-sm text-graytext">ALL</label>
+          </div>
+          <div id="cart-total" class="checkout-div4"></div>
+        </div>
+
+        <button class="checkout-div2" onclick="window.location.href='checkout.html'">
+          Check Out
+        </button>
+      </div>
+
+      <div id="empty-cart" class="text-center mt-8 text-graytext" style="display: none">
+        Your cart is empty.
+        <a href="index.html" class="text-primary hover:underline">Continue shopping</a>.
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      <p>&copy; 2025 MotoPro. All rights reserved.</p>
+    </footer>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script>
+      const cartItemsList = document.getElementById("cart-items");
+      const cartTotalElement = document.getElementById("cart-total");
+      const emptyCartMessage = document.getElementById("empty-cart");
+      const cartCountElementHeader = document.getElementById("cart-count");
+
+      let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+
+      function updateCartDisplay() {
+        cartItemsList.innerHTML = "";
+        let total = 0;
+
+        if (cart.length === 0) {
+          emptyCartMessage.style.display = "block";
+          cartTotalElement.textContent = "";
+        } else {
+          emptyCartMessage.style.display = "none";
+          cart.forEach((item) => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("cart-grid-container", "p-4", "border-b");
+            listItem.innerHTML = `
+                        <div class="cart-image-area">
+                            <img src="images/${item.image}" alt="${item.name}" class="w-full h-auto rounded-md object-cover">
+                        </div>
+                        <div class="cart-name-area">
+                            <div class="font-semibold text-lg">${item.name}</div>
+                            <button class="remove-item-btn text-red-500 hover:text-red-700 focus:outline-none" data-id="${item.id}">
+                                <span class="material-symbols-outlined align-middle">delete</span>
+                            </button>
+                        </div>
+                        <div class="cart-quantity-area">
+                            <span class="text-graytext mr-2">Quantity:</span>
+                            <span class="text-lg">${item.quantity}</span>
+                        </div>
+                        <div class="cart-price-area font-semibold text-lg text-black">
+                            ${item.price}
+                        </div>
+                        <div class="cart-actions-area space-x-2">
+                            <button class="decrease-quantity bg-gray-100 text-graytext rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-200 focus:outline-none" data-id="${item.id}">
+                                <span class="font-bold">-</span>
+                            </button>
+                            <button class="increase-quantity bg-gray-100 text-graytext rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-200 focus:outline-none" data-id="${item.id}">
+                                <span class="font-bold">+</span>
+                            </button>
+                        </div>
+                    `;
+            cartItemsList.appendChild(listItem);
+            total += parseFloat(item.price.replace("$", "")) * item.quantity;
+          });
+          cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        // Update cart count in the header
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        if (totalItems > 0) {
+          cartCountElementHeader.textContent = totalItems;
+          cartCountElementHeader.style.display = "block";
+        } else {
+          cartCountElementHeader.style.display = "none";
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      function removeItem(productId) {
+        cart = cart.filter((item) => item.id !== productId);
+        updateCartDisplay();
+      }
+
+      function increaseQuantity(productId) {
+        const item = cart.find((item) => item.id === productId);
+        if (item) {
+          item.quantity++;
+          updateCartDisplay();
+        }
+      }
+
+      function decreaseQuantity(productId) {
+        const item = cart.find((item) => item.id === productId);
+        if (item && item.quantity > 1) {
+          item.quantity--;
+          updateCartDisplay();
+        } else if (item && item.quantity === 1) {
+          removeItem(productId);
+        }
+      }
+
+      // Event listeners for quantity changes and removal
+      cartItemsList.addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-item-btn")) {
+          const productId = parseInt(event.target.dataset.id);
+          removeItem(productId);
+        } else if (event.target.classList.contains("increase-quantity")) {
+          const productId = parseInt(event.target.dataset.id);
+          increaseQuantity(productId);
+        } else if (event.target.classList.contains("decrease-quantity")) {
+          const productId = parseInt(event.target.dataset.id);
+          decreaseQuantity(productId);
+        }
+      });
+
+      // Initial cart display
+      updateCartDisplay();
+
+      // Update header cart count on page load
+      function updateHeaderCartCount() {
+        const storedCart = localStorage.getItem("cart");
+        const currentCart = storedCart ? JSON.parse(storedCart) : [];
+        const totalItems = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+        if (totalItems > 0) {
+          cartCountElementHeader.textContent = totalItems;
+          cartCountElementHeader.style.display = "block";
+        } else {
+          cartCountElementHeader.style.display = "none";
+        }
+      }
+
+      updateHeaderCartCount();
+    </script>
+  </body>
+</html>

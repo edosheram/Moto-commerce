@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - MotoPro</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ff6f00", // Your brand color
+              secondary: "#777",
+              accent: "#008cba",
+              light: "#f8f8f8",
+              border: "#eee",
+              text: "#333",
+              graytext: "#777",
+            },
+            fontFamily: {
+              "racing-sans": ['"Racing Sans One"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Basic Reset (Consider moving relevant parts to your style.css) */
+      body,
+      h1,
+      h2,
+      h3,
+      p,
+      ul,
+      li,
+      div,
+      header,
+      nav,
+      a,
+      span,
+      button,
+      img {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      .container {
+        max-width: 768px;
+        margin: 20px auto;
+        padding: 1rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-header {
+        background-color: #f8f8f8;
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+      }
+
+      .back-button-profile {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 1rem;
+      }
+
+      .back-button-profile .material-symbols-outlined {
+        font-size: 1.5rem;
+      }
+
+      .profile-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        border: 1px solid #eee;
+      }
+
+      .profile-picture-container {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1rem;
+        border: 1px solid #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .profile-picture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .user-details {
+        flex-grow: 1;
+      }
+
+      .user-name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 0.25rem;
+      }
+
+      .user-email {
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      .profile-options-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .profile-option-item {
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .profile-option-item:hover {
+        background-color: #eee;
+      }
+
+      .option-icon {
+        margin-right: 0.75rem;
+        font-size: 1.25rem;
+      }
+
+      .option-arrow {
+        font-size: 1.25rem;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="profile-header">
+      <a href="javascript:history.back()" class="back-button-profile">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+    </header>
+
+    <div class="container">
+      <div class="profile-info">
+        <div class="profile-picture-container">
+          <img
+            src="https://media.discordapp.net/attachments/1068052457852243970/1370061854646337678/Screenshot_2024-10-22_211755.png?ex=68275b88&is=68260a08&hm=3458c934ee0f85f92cc3bbfd453617814be38848ef6e7077f4ff3d8414d85b89&=&format=webp&quality=lossless"
+            alt="Profile Picture"
+            class="profile-picture"
+          />
+        </div>
+        <div class="user-details">
+          <p class="user-name">Cheram Dakoulo</p>
+          <p class="user-email">yourname@gmail.com</p>
+        </div>
+      </div>
+
+      <ul class="profile-options-list">
+        <a href="my-profile-details.html" class="profile-option-item">
+          <span>
+            <span class="material-symbols-outlined option-icon">person</span>
+            My Profile
+          </span>
+          <span class="material-symbols-outlined option-arrow">chevron_right</span>
+        </a>
+        <a href="settings.html" class="profile-option-item">
+          <span>
+            <span class="material-symbols-outlined option-icon">settings</span>
+            Settings
+          </span>
+          <span class="material-symbols-outlined option-arrow">chevron_right</span>
+        </a>
+        <a href="notifications.html" class="profile-option-item">
+          <span>
+            <span class="material-symbols-outlined option-icon">notifications</span>
+            Notification
+          </span>
+          <span class="material-symbols-outlined option-arrow">chevron_right</span>
+        </a>
+        <a href="login.html" class="profile-option-item">
+          <span>
+            <span class="material-symbols-outlined option-icon">logout</span>
+            Log Out
+          </span>
+          <span class="material-symbols-outlined option-arrow">chevron_right</span>
+        </a>
+      </ul>
+    </div>
+  </body>
+</html>

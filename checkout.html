@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - MotoPro</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ff6f00", // Your brand color
+              secondary: "#777",
+              accent: "#008cba",
+              light: "#f8f8f8",
+              border: "#eee",
+              text: "#333",
+              graytext: "#777",
+            },
+            fontFamily: {
+              "racing-sans": ['"Racing Sans One"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Basic Reset */
+      body,
+      h1,
+      h2,
+      h3,
+      p,
+      ul,
+      li,
+      form,
+      input,
+      button {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      /* Header (Basic for now) */
+      .checkout-header {
+        background-color: #f8f8f8;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .checkout-header h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: "Racing Sans One", sans-serif;
+        color: #333;
+      }
+
+      .container {
+        max-width: 768px;
+        margin: 20px auto;
+        padding: 1rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+      }
+
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .order-item:last-child {
+        border-bottom: none;
+      }
+
+      .item-details {
+        flex-grow: 1;
+        margin-right: 1rem;
+      }
+
+      .item-name {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .item-quantity {
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      .item-price {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25rem 0;
+      }
+
+      .summary-label {
+        color: #333;
+      }
+
+      .summary-value {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .voucher-input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 0.75rem;
+      }
+
+      .delivery-info p {
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+      /* Header (Basic for now) */
+      .checkout-header {
+        background-color: #f8f8f8;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center; /* Vertically align back button and title */
+      }
+
+      .checkout-header h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: "Racing Sans One", sans-serif;
+        color: #333;
+        margin-left: 1rem; /* Add some spacing between the back button and title */
+      }
+
+      .back-button {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .back-button .material-symbols-outlined {
+        font-size: 1.5rem; /* Adjust size of the back arrow */
+      }
+
+      .payment-options {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .payment-button {
+        padding: 0.75rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        flex-grow: 1;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+      }
+
+      .payment-button img {
+        height: 24px; /* Adjust as needed */
+      }
+
+      .place-order-button {
+        background-color: black;
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: 40px; /* Roughly 80% of a typical button height */
+        font-size: 1.1rem;
+        font-weight: bold;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .place-order-button:hover {
+        background-color: #222;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="checkout-header">
+      <a href="cart.html" class="back-button">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <h1>Checkout</h1>
+    </header>
+
+    <div class="container">
+      <section class="mb-4">
+        <h2 class="section-title">Customer Information</h2>
+        <div id="customer-info">
+          <p><strong>Name:</strong> John Doe</p>
+          <p><strong>Phone:</strong> +1 555-123-4567</p>
+          <p><strong>Address:</strong> 123 Main St, Anytown, USA</p>
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <h2 class="section-title">Order Summary</h2>
+        <ul id="order-summary"></ul>
+        <input type="text" class="voucher-input" placeholder="Add shop voucher code" />
+        <div class="summary-item">
+          <span class="summary-label">Subtotal (<span id="item-count">0</span> items)</span>
+          <span class="summary-value" id="subtotal">$0.00</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Shipping cost</span>
+          <span class="summary-value" id="shipping-cost">Free</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Total</span>
+          <span class="summary-value" id="total">$0.00</span>
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <h2 class="section-title">Delivery Location</h2>
+        <div class="delivery-info">
+          <p><strong>Deliver to:</strong> Zone 3, Diclum Manolo Fortich Bukidnon</p>
+          <button class="text-accent hover:underline focus:outline-none">Add new address</button>
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <h2 class="section-title">Payment Options</h2>
+        <div class="payment-options">
+          <button class="payment-button font-bold">
+            <img
+              src="https://img.icons8.com/?size=100&id=am4ltuIYDpQ5&format=png&color=000000"
+              alt="Google Pay"
+            />
+            G Pay
+          </button>
+          <button class="payment-button font-bold">
+            <img
+              src="https://img.icons8.com/?size=100&id=39409&format=png&color=000000"
+              alt="Apple Pay"
+            />
+            Apple Pay
+          </button>
+          <button class="payment-button font-bold">
+            <img
+              src="https://img.icons8.com/?size=100&id=66087&format=png&color=000000"
+              alt="PayPal"
+            />
+            Other
+          </button>
+        </div>
+      </section>
+
+      <button class="place-order-button" onclick="window.location.href='delivery_details.html'">
+        Place Order
+      </button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const orderSummaryList = document.getElementById("order-summary");
+        const itemCountSpan = document.getElementById("item-count");
+        const subtotalSpan = document.getElementById("subtotal");
+        const totalSpan = document.getElementById("total");
+
+        // Retrieve cart data from localStorage
+        const cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+        let subtotal = 0;
+
+        // Function to format price
+        function formatPrice(price) {
+          return parseFloat(price.replace("$", "")).toFixed(2);
+        }
+
+        // Populate the order summary
+        cart.forEach((item) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("order-item");
+          listItem.innerHTML = `
+                    <div class="item-details">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-quantity">Quantity: ${item.quantity}</span>
+                    </div>
+                    <span class="item-price">$${(formatPrice(item.price) * item.quantity).toFixed(
+                      2
+                    )}</span>
+                `;
+          orderSummaryList.appendChild(listItem);
+          subtotal += parseFloat(formatPrice(item.price)) * item.quantity;
+        });
+
+        // Update the summary totals
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        itemCountSpan.textContent = totalItems;
+        subtotalSpan.textContent = `$${subtotal.toFixed(2)}`;
+        totalSpan.textContent = `$${subtotal.toFixed(2)}`; // Assuming free shipping
+
+        // You would typically have more logic here to handle:
+        // - Getting actual customer information (from user session or input)
+        // - Allowing the user to change the delivery address
+        // - Implementing payment processing when the "Place Order" button is clicked
+      });
+    </script>
+  </body>
+</html>

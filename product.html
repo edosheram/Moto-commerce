@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details - MotoPro</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              "racing-sans": ['"Racing Sans One"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Header styles */
+      .top-header {
+        background-color: #f8f8f8;
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: "Racing Sans One", sans-serif;
+      }
+
+      .logo a {
+        display: flex; /* Make the anchor a flex container */
+        align-items: center; /* Vertically align items within the anchor */
+      }
+
+      .logo img {
+        width: auto; /* Adjust as needed */
+        height: 2rem; /* Adjust to your desired logo height */
+      }
+
+      .search-bar {
+        flex-grow: 1;
+        margin: 0 0.75rem;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+        padding: 0.35rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 0.9rem;
+      }
+
+      .header-icons {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .header-icons a {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative; /* For the badge */
+      }
+
+      .material-symbols-outlined {
+        font-size: 1.25rem;
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -0.5rem;
+        right: -0.5rem;
+        background-color: #ff6f00;
+        color: white;
+        border-radius: 50%;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.6rem;
+      }
+
+      /* Navigation Bar */
+      .navigation {
+        background-color: #fff;
+        padding: 0.5rem 0;
+        overflow-x: auto;
+        border-top: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 1rem; /* Add some space below the navigation */
+      }
+
+      .nav-links ul {
+        list-style: none;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+        white-space: nowrap;
+        font-size: 1rem;
+        font-family: "Racing Sans One", sans-serif;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #333;
+        padding: 0.5rem 0;
+      }
+
+      .nav-links li a.active-nav {
+        font-weight: bold;
+        color: #000000;
+      }
+
+      /* Hide horizontal scrollbar */
+      .size-buttons-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
+      .size-buttons-container {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="top-header">
+      <div class="logo">
+        <a href="homepage.html">
+          <img src="images/logo.svg" alt="MotoPro Logo" />
+        </a>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." />
+      </div>
+      <div class="header-icons">
+        <a href="#" id="cart-icon"
+          ><span class="material-symbols-outlined">shopping_cart</span
+          ><span id="cart-count" class="cart-badge" style="display: none">0</span></a
+        >
+        <a href="#"><span class="material-symbols-outlined">person</span></a>
+      </div>
+    </header>
+
+    <nav class="navigation">
+      <div class="nav-links">
+        <ul>
+          <li>
+            <a href="categories.html" data-category="helmets" class="nav-link">Helmet</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="riding-gear" class="nav-link">Riding Gear</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="parts" class="nav-link">Parts</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="accessories" class="nav-link">Accessories</a>
+          </li>
+          <li>
+            <a href="categories.html" data-category="tires" class="nav-link">Tires</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 bg-white rounded-lg shadow-md">
+      <div class="product-details">
+        <div class="mb-4">
+          <img id="productImage" src="" alt="Product Image" class="w-full rounded-lg" />
+        </div>
+        <h2 id="productName" class="text-2xl font-racing-sans font-bold text-gray-800 mb-2"></h2>
+        <p class="text-xl font-semibold text-orange-500 mb-4" id="productPrice"></p>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Size:</label>
+          <div
+            id="sizeButtonsContainer"
+            class="size-buttons-container overflow-x-auto whitespace-nowrap"
+          >
+            <div id="sizeButtons" class="flex gap-2"></div>
+          </div>
+          <div class="size-options" id="sizeOptionsContainer" style="display: none">
+            <select
+              id="sizeSelect"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option value="">-- Please Select --</option>
+            </select>
+          </div>
+        </div>
+
+        <button
+          id="addToCartBtn"
+          class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-lg w-full mb-6"
+        >
+          Add to Cart
+        </button>
+
+        <div class="product-description border-t pt-6">
+          <h3 class="text-lg font-racing-sans font-semibold text-gray-800 mb-3">Product Details</h3>
+          <p id="productDescription" class="text-gray-700 leading-relaxed"></p>
+        </div>
+
+        <a
+          href="categories.html"
+          id="backToCategoryLink"
+          class="inline-flex items-center mt-8 text-blue-500 hover:underline"
+        >
+          <span class="material-symbols-outlined mr-2">arrow_back</span>
+          Back to Category
+        </a>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const productImage = document.getElementById("productImage");
+        const productName = document.getElementById("productName");
+        const productPrice = document.getElementById("productPrice");
+        const productDescription = document.getElementById("productDescription");
+        const sizeOptionsContainer = document.getElementById("sizeOptionsContainer");
+        const sizeSelect = document.getElementById("sizeSelect");
+        const addToCartBtn = document.getElementById("addToCartBtn");
+        const sizeButtonsContainer = document.getElementById("sizeButtonsContainer");
+        const sizeButtonsDiv = document.getElementById("sizeButtons");
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        function getProductIdFromUrl() {
+          const urlParams = new URLSearchParams(window.location.search);
+          return parseInt(urlParams.get("id"));
+        }
+
+        const productId = getProductIdFromUrl();
+        const productsData = {
+          helmets: [
+            {
+              id: 1,
+              name: "Arai Regent-X Helmet",
+              image: "images/helmet1.jpg",
+              price: "$576.00",
+              description:
+                "Arai Regent-X Helmet PB SCLC Shell: Peripherally Belted - Super Complex Laminate Construction shell. Design combines multiple materials and techniques created internally by Arai that deliver both performance and affordability. Shell has superb tensile strength due to a variety of carefully positioned materials. Single intake vent, large sized lever allows for easy operation even with thick gloves. Three position chin vent helps in demisting the visor and offering fresh air to the rider. Side exhaust vents create a venturi effect to pull more warm air from inside the helmet. Neck roll exhaust vent allows hot, stale air to be pulled from the helmets interior. Visor system with Facial Contour System (FCS) offers a more snug fit and enhances comfort to the lower jaw and face area. Emergency Release System (ERS) allows medical third parties to remove the cheek pads by just pulling the integrated tabs. Double D-Ring closure system.",
+              sizes: ["XS", "SM", "MD", "LARGE", "XL", "2XL", "3XL"],
+            },
+            {
+              id: 2,
+              name: "Alpinestars Supertech R10 Carbon Helmet",
+              image: "helmet2.jpg",
+              price: "$899.95",
+              description:
+                "The Alpinestars Supertech R10 is a DOT/ECE homologated helmet featuring a lightweight carbon shell, advanced ventilation, and aerodynamic design for superior performance and safety.",
+              sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+            },
+            {
+              id: 3,
+              name: "Scorpion EXO-R1 Air Carbon Onyx Helmet",
+              image: "helmet3.jpg",
+              price: "$459.95",
+              description:
+                "The Scorpion EXO-R1 Air Carbon Onyx helmet blends premium carbon fiber construction with advanced features like Airfit® inflation system and Ellip-Tec™ II face shield mechanism for a superior riding experience.",
+              sizes: ["S", "M", "L", "XL"],
+            },
+            {
+              id: 4,
+              name: "AGV K1 S Helmet",
+              image: "helmet4.jpg",
+              price: "$279.99",
+              description:
+                "The AGV K1 S helmet is designed for sport riding, featuring an aerodynamic shell shape, multiple vents for optimal airflow, and a wide field of vision for enhanced safety.",
+              sizes: ["XS", "S", "MS", "ML", "L", "XL", "XXL"],
+            },
+            {
+              id: 5,
+              name: "Bell Race Star DLX Flex Helmet",
+              image: "helmet5.jpg",
+              price: "$749.95",
+              description:
+                "The Bell Race Star DLX Flex offers advanced head protection with its Flex impact liner, lightweight carbon composite shell, and Panovision™ viewport with Class 1 optics.",
+              sizes: ["S", "M", "L", "XL", "XXL"],
+            },
+            {
+              id: 6,
+              name: "Shoei RF-1400 Helmet",
+              image: "helmet6.jpg",
+              price: "$539.99",
+              description:
+                "The Shoei RF-1400 is a premium sport-touring helmet known for its comfort, quietness, and exceptional aerodynamics, featuring a multi-ply matrix AIM+ shell and advanced ventilation system.",
+              sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+            },
+            {
+              id: 7,
+              name: "HJC RPHA 11 Pro Helmet",
+              image: "helmet7.jpg",
+              price: "$399.99",
+              description:
+                "The HJC RPHA 11 Pro is a track-focused helmet with a lightweight PIM+ shell, optimized ventilation for extreme airflow, and an emergency release system for added safety.",
+              sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+            },
+            {
+              id: 8,
+              name: "Nolan N87 Helmet",
+              image: "helmet8.jpg",
+              price: "$219.95",
+              description:
+                "The Nolan N87 is a full-face helmet offering comfort and safety features, including a wide visor, Pinlock anti-fog insert, and an internal sun visor, making it ideal for everyday riding.",
+              sizes: ["XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL"],
+            },
+            {
+              id: 9,
+              name: "KYT TT-Course Helmet",
+              image: "helmet9.jpg",
+              price: "$179.00",
+              description:
+                "The KYT TT-Course helmet is a sporty full-face helmet with an aerodynamic polycarbonate shell, designed to offer a balance of performance and affordability for riders.",
+              sizes: ["XS", "S", "M", "L", "XL"],
+            },
+            {
+              id: 10,
+              name: "LS2 FF399 Valiant II Helmet",
+              image: "helmet10.jpg",
+              price: "$299.99",
+              description:
+                "The LS2 FF399 Valiant II is a versatile modular helmet that can easily transition from a full-face to an open-face configuration, offering convenience and flexibility for various riding conditions.",
+              sizes: ["XS", "S", "M", "L", "XL", "XXL", "3XL"],
+            },
+            {
+              id: 11,
+              name: "Icon Airflite Battlescars Helmet",
+              image: "helmet11.jpg",
+              price: "$280.00",
+              description:
+                "The Icon Airflite Battlescars helmet features an aggressive design, a wide field of view, an internal drop-down sun visor, and multiple ventilation ports for a unique and functional riding experience.",
+              sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
+            },
+            {
+              id: 12,
+              name: "Biltwell Gringo S Helmet",
+              image: "helmet12.jpg",
+              price: "$199.95",
+              description:
+                "The Biltwell Gringo S is a retro-inspired full-face helmet with a classic look, featuring a hand-stitched interior, a comfortable fit, and DOT/ECE safety certifications for vintage style with modern protection.",
+              sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+            },
+          ],
+          "riding-gear": [
+            {
+              id: 13,
+              name: "Alpinestars Tech-Air 5 System",
+              image: "riding-gear1.jpg",
+              price: "$829.95",
+              description:
+                "The Alpinestars Tech-Air 5 is a standalone, wearable airbag system that offers unparalleled upper body protection for motorcycle riders. It's lightweight, breathable, and integrates seamlessly with most riding jackets.",
+              sizes: ["XS", "S", "M", "L", "XL", "2XL"],
+            },
+            {
+              id: 14,
+              name: "Klim Dakar Jacket",
+              image: "riding-gear2.jpg",
+              price: "$389.99",
+              description:
+                "The Klim Dakar Jacket is a highly durable and versatile off-road/adventure riding jacket built to withstand tough conditions. It features excellent ventilation and ample storage for long rides.",
+              sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
+            },
+            {
+              id: 15,
+              name: "Rev'it! Sand 4 Gloves",
+              image: "riding-gear3.jpg",
+              price: "$99.99",
+              description:
+                "The Rev'it! Sand 4 gloves are lightweight and comfortable adventure riding gloves designed for warm weather. They offer excellent grip, ventilation, and protection for on and off-road adventures.",
+              sizes: ["S", "M", "L", "XL", "XXL", "XXXL"],
+            },
+            {
+              id: 16,
+              name: "Sidi Adventure 2 Boots",
+              image: "riding-gear4.jpg",
+              price: "$399.99",
+              description:
+                "The Sidi Adventure 2 boots are rugged and protective adventure touring boots built for comfort and durability on long journeys. They feature a waterproof lining and a sturdy sole for off-road capability.",
+              sizes: [40, 41, 42, 43, 44, 45, 46, 47],
+            },
+            {
+              id: 17,
+              name: "Leatt Body Protector 3.0",
+              image: "riding-gear5.jpg",
+              price: "$199.99",
+              description:
+                "The Leatt Body Protector 3.0 is a lightweight and flexible upper body protector designed for motocross and off-road riding. It offers chest, back, and shoulder protection without restricting movement.",
+              sizes: ["S/M", "L/XL"],
+            },
+            {
+              id: 18,
+              name: "Fox Racing V1 Helmet",
+              image: "riding-gear6.jpg",
+              price: "$149.95",
+              description:
+                "The Fox Racing V1 helmet offers entry-level performance and style for motocross and off-road riders. It features a comfortable liner, multiple vents, and a durable polycarbonate shell.",
+              sizes: ["S", "M", "L", "XL", "XXL"],
+            },
+          ],
+          parts: [
+            {
+              id: 19,
+              name: "Brembo Front Brake Pads",
+              image: "parts1.jpg",
+              price: "$79.99",
+              description:
+                "Brembo front brake pads offer high performance and reliability for a variety of motorcycle models, providing excellent stopping power and consistent braking feel.",
+            },
+            {
+              id: 20,
+              name: "Akrapovič Slip-On Exhaust",
+              image: "parts2.jpg",
+              price: "$599.00",
+              description:
+                "Akrapovič slip-on exhausts are premium aftermarket exhausts that enhance your motorcycle's performance, sound, and aesthetics with their high-quality construction and design.",
+            },
+            {
+              id: 21,
+              name: "Öhlins Rear Shock Absorber",
+              image: "parts3.jpg",
+              price: "$879.99",
+              description:
+                "Öhlins rear shock absorbers are high-performance suspension components that improve your motorcycle's handling, comfort, and control, offering adjustable damping and ride height.",
+            },
+            {
+              id: 22,
+              name: "DID Chain and Sprocket Kit",
+              image: "parts4.jpg",
+              price: "$149.95",
+              description:
+                "DID chain and sprocket kits provide a reliable and durable drivetrain solution for your motorcycle, ensuring smooth power transfer and long-lasting performance.",
+            },
+            {
+              id: 23,
+              name: "Puig Windscreen",
+              image: "parts5.jpg",
+              price: "$129.99",
+              description:
+                "Puig windscreens are designed to enhance your motorcycle's aerodynamics and rider comfort by reducing wind blast and providing a more streamlined riding experience.",
+            },
+            {
+              id: 24,
+              name: "Michelin Road 5 Tires (Pair)",
+              image: "parts6.jpg",
+              price: "$319.99",
+              description:
+                "Michelin Road 5 tires offer exceptional grip in both wet and dry conditions, along with long-lasting tread life, making them an excellent choice for sport-touring riders.",
+            },
+          ],
+          accessories: [
+            {
+              id: 25,
+              name: "Garmin Zumo XT GPS",
+              image: "accessories1.jpg",
+              price: "$549.99",
+              description:
+                "The Garmin Zumo XT is a rugged and waterproof GPS navigator designed specifically for motorcycle riders, featuring a bright touchscreen, preloaded maps, and adventure routing options.",
+            },
+            {
+              id: 26,
+              name: "Sena 50S Bluetooth Headset",
+              image: "accessories2.jpg",
+              price: "$299.95",
+              description:
+                "The Sena 50S is a premium Bluetooth communication system for motorcycle riders, offering Mesh Intercom™ technology, crystal-clear audio, and seamless connectivity with other riders and devices.",
+            },
+            {
+              id: 27,
+              name: "Oxford Heated Grips",
+              image: "accessories3.jpg",
+              price: "$89.99",
+              description:
+                "Oxford heated grips provide warmth and comfort for motorcycle riders in cold weather conditions, featuring multiple heat settings and easy installation.",
+            },
+            {
+              id: 28,
+              name: "SW-MOTECH Tank Bag",
+              image: "accessories4.jpg",
+              price: "$179.99",
+              description:
+                "SW-MOTECH tank bags offer convenient and secure storage for your essentials while riding, with various sizes and mounting systems available to fit different motorcycle models.",
+            },
+            {
+              id: 29,
+              name: "Battery Tender Plus",
+              image: "accessories5.jpg",
+              price: "$69.95",
+              description:
+                "The Battery Tender Plus is a smart battery charger and maintainer that keeps your motorcycle battery in optimal condition during storage, ensuring reliable starts when you're ready to ride.",
+            },
+            {
+              id: 30,
+              name: "GoPro HERO12 Black",
+              image: "accessories6.jpg",
+              price: "$399.99",
+              description:
+                "The GoPro HERO12 Black is a versatile action camera that captures stunning videos and photos of your rides, with advanced stabilization and durability for demanding conditions.",
+            },
+          ],
+          tires: [
+            {
+              id: 31,
+              name: "Michelin Pilot Road 5",
+              image: "tires1.jpg",
+              price: "$160.00",
+              description:
+                "The Michelin Pilot Road 5 tires offer excellent grip on both wet and dry roads, combined with long mileage, making them ideal for sport touring.",
+            },
+            {
+              id: 32,
+              name: "Pirelli Diablo Rosso IV",
+              image: "tires2.jpg",
+              price: "$175.00",
+              description:
+                "Pirelli Diablo Rosso IV tires are designed for sporty riding, offering high levels of grip, precise handling, and excellent performance on the road.",
+            },
+            {
+              id: 33,
+              name: "Bridgestone Battlax S22",
+              image: "tires3.jpg",
+              price: "$155.00",
+              description:
+                "Bridgestone Battlax S22 tires are high-performance sport tires that provide exceptional grip and handling for spirited riding on the street and track.",
+            },
+            {
+              id: 34,
+              name: "Continental ContiRoadAttack 4",
+              image: "tires4.jpg",
+              price: "$165.00",
+              description:
+                "Continental ContiRoadAttack 4 tires offer a perfect balance of sporty handling, excellent wet grip, and long-lasting performance for sport-touring riders.",
+            },
+            {
+              id: 35,
+              name: "Dunlop Sportmax Q3+",
+              image: "tires5.jpg",
+              price: "$149.99",
+              description:
+                "Dunlop Sportmax Q3+ tires are track-oriented sport tires that deliver outstanding grip and handling for aggressive riding and track days.",
+            },
+            {
+              id: 36,
+              name: "Metzeler Roadtec 01 SE",
+              image: "tires6.jpg",
+              price: "$158.00",
+              description:
+                "Metzeler Roadtec 01 SE tires are designed for sport touring, offering excellent grip in various conditions, high mileage, and a comfortable ride.",
+            },
+          ],
+        };
+
+        function findProduct(id) {
+          for (const category in productsData) {
+            const product = productsData[category].find((p) => p.id === id);
+            if (product) {
+              return product;
+            }
+          }
+          return null;
+        }
+
+        let currentProduct = findProduct(productId);
+        let selectedSize = null;
+
+        function updateAddToCartButtonState() {
+          addToCartBtn.disabled =
+            !selectedSize &&
+            currentProduct &&
+            currentProduct.sizes &&
+            currentProduct.sizes.length > 0;
+        }
+
+        if (currentProduct) {
+          productImage.src = currentProduct.image;
+          productImage.alt = currentProduct.name;
+          productName.textContent = currentProduct.name;
+          productPrice.textContent = currentProduct.price;
+          productDescription.textContent = currentProduct.description;
+
+          if (currentProduct.sizes && currentProduct.sizes.length > 0) {
+            sizeButtonsContainer.style.display = "block";
+            sizeOptionsContainer.style.display = "none";
+
+            sizeButtonsDiv.innerHTML = "";
+            currentProduct.sizes.forEach((size) => {
+              const button = document.createElement("button");
+              button.classList.add(
+                "size-button",
+                "py-2",
+                "px-4",
+                "border",
+                "border-gray-300",
+                "rounded-md",
+                "text-gray-700",
+                "hover:bg-gray-200",
+                "focus:outline-none",
+                "focus:ring-2",
+                "focus:ring-orange-500",
+                "font-semibold",
+                "text-sm"
+              );
+              button.textContent = size;
+              button.addEventListener("click", function () {
+                sizeButtonsDiv
+                  .querySelectorAll(".size-button")
+                  .forEach((btn) =>
+                    btn.classList.remove("bg-orange-500", "text-white", "border-black")
+                  );
+                this.classList.add("bg-orange-500", "text-white", "border-black", "border");
+                selectedSize = size;
+                updateAddToCartButtonState();
+              });
+              sizeButtonsDiv.appendChild(button);
+            });
+            updateAddToCartButtonState();
+          } else if (currentProduct.sizes && currentProduct.sizes.length === 0) {
+            sizeButtonsContainer.style.display = "none";
+            sizeOptionsContainer.style.display = "none";
+          } else {
+            sizeButtonsContainer.style.display = "none";
+            sizeOptionsContainer.style.display = "none";
+          }
+
+          addToCartBtn.addEventListener("click", function () {
+            if (currentProduct.sizes && currentProduct.sizes.length > 0 && !selectedSize) {
+              alert("Please select a size before adding to cart.");
+              return;
+            }
+            console.log("Adding to cart:", currentProduct.name, "Size:", selectedSize || "N/A");
+            // Implement your add to cart logic here
+          });
+
+          // Set active navigation link (you might need to adjust this based on how you determine the current category of the product)
+          navLinks.forEach((link) => {
+            if (
+              link.dataset.category ===
+              Object.keys(productsData).find((key) =>
+                productsData[key].some((p) => p.id === currentProduct.id)
+              )
+            ) {
+              link.classList.add("active-nav");
+            } else {
+              link.classList.remove("active-nav");
+            }
+          });
+        } else {
+          const container = document.querySelector(".container");
+          container.innerHTML =
+            '<p class="text-red-500">Product not found.</p><a href="index.html" class="inline-block mt-4 text-blue-500 hover:underline">Back to Category</a>';
+        }
+      });
+    </script>
+  </body>
+</html>
